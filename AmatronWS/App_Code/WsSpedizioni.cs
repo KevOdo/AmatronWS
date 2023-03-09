@@ -23,12 +23,11 @@ public class WsSpedizioni : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public void SPEDIZIONI_Insert(int chiave, int chiaveOrdine, string stato, string dataora)
+    public void SPEDIZIONI_Insert(int chiaveOrdine, string stato, string dataora)
     {
         DATABASE DB = new DATABASE();
         DB.cmd.Parameters.Clear();
-        DB.query = "spSPEDIZIONI_Insert";
-        DB.cmd.Parameters.AddWithValue("chiave", chiave);     
+        DB.query = "spSPEDIZIONI_Insert";  
         DB.cmd.Parameters.AddWithValue("chiaveOrdine", chiaveOrdine);     
         DB.cmd.Parameters.AddWithValue("stato", stato);     
         DB.cmd.Parameters.AddWithValue("dataora", dataora);     

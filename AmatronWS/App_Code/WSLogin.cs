@@ -33,4 +33,16 @@ public class WSLogin : System.Web.Services.WebService
         return DT;
     }
 
+    [WebMethod]
+    public DataTable RECUPERAPWD(string EMAIL)
+    {
+        DATABASE DB = new DATABASE();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spRECUPERAPWD";
+        DB.cmd.Parameters.AddWithValue("@EMAIL", EMAIL);
+        DataTable DT = DB.EseguiSPRead();
+        DT.TableName = "RecuperaPwd";
+        return DT;
+    }
+
 }

@@ -35,4 +35,30 @@ public class WsFiltra : System.Web.Services.WebService
         dt.TableName = "searchTerm";
         return dt;
     }
+
+    [WebMethod]
+    public DataTable FILTRA_Corrieri(string CORRIERI)
+    {
+        DATABASE DB = new DATABASE();
+        DataTable dt = new DataTable();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spFILTRA_Corrieri";
+        DB.cmd.Parameters.AddWithValue("CORRIERI", CORRIERI);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "FiltraCorrieri";
+        return dt;
+    }
+
+    [WebMethod]
+    public DataTable FILTRA_Venditori(string VENDITORI)
+    {
+        DATABASE DB = new DATABASE();
+        DataTable dt = new DataTable();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spFILTRA_Venditori";
+        DB.cmd.Parameters.AddWithValue("VENDITORI", VENDITORI);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "FiltraVenditori";
+        return dt;
+    }
 }

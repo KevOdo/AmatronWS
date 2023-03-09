@@ -24,11 +24,12 @@ public class WsValutazioni : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public void VALUTAZIONI_Insert(int chiaveprodotto, int stelle, string commento, string datacommento)
+    public void VALUTAZIONI_Insert(int chiaveprodotto,int chiaveCLIENTE, int stelle, string commento, string datacommento)
     {
         DATABASE DB = new DATABASE();
         DB.query = "spVALUTAZIONI_Insert";
         DB.cmd.Parameters.AddWithValue("chiavePRODOTTO", chiaveprodotto);
+        DB.cmd.Parameters.AddWithValue("chiaveCLIENTE", chiaveCLIENTE);
         DB.cmd.Parameters.AddWithValue("STELLE", stelle);
         DB.cmd.Parameters.AddWithValue("COMMENTO", commento);
         DB.cmd.Parameters.AddWithValue("DATACOMMENTO", datacommento);
@@ -95,6 +96,33 @@ public class WsValutazioni : System.Web.Services.WebService
         DB.cmd.Parameters.AddWithValue("chiavePRODOTTO", chiaveprodotto);
         dt = DB.EseguiSPRead();
         dt.TableName = "MediaValutazioni";
+        return dt;
+    }
+
+    [WebMethod]
+    public DataTable VALUTAZIONI_ProdottoRecensito(int chiaveprodotto, int chiavecliente)
+    {
+        DataTable dt = new DataTable();
+        DATABASE DB = new DATABASE();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spVALUTAZIONI_ProdottoRecensito";
+        DB.cmd.Parameters.AddWithValue("chiavePRODOTTO", chiaveprodotto);
+        DB.cmd.Parameters.AddWithValue("chiavecliente", chiavecliente);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "ProdottoRecensito";
+        return dt;
+    }
+
+    [WebMethod]
+    public DataTable VALUTAZIONI_RecensioniClienti(int chiaveprodotto)
+    {
+        DataTable dt = new DataTable();
+        DATABASE DB = new DATABASE();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spVALUTAZIONI_RecensioniClienti";
+        DB.cmd.Parameters.AddWithValue("chiavePRODOTTO", chiaveprodotto);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "RecensioniClienti";
         return dt;
     }
 }

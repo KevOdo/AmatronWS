@@ -176,4 +176,17 @@ public class WsOrdini : System.Web.Services.WebService
         dt.TableName = "CORRIERI_CHIAVERandom";
         return dt;
     }
+
+    [WebMethod]
+    public DataTable ORDINI_SelectOrdineCliente(int chiaveCliente)
+    {
+        DATABASE DB = new DATABASE();
+        DataTable dt = new DataTable();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spORDINI_SelectOrdineCliente";
+        DB.cmd.Parameters.AddWithValue("chiaveCliente", chiaveCliente);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "SelectOrdineCliente";
+        return dt;
+    }
 }

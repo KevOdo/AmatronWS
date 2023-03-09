@@ -119,4 +119,15 @@ public class WsCarrello : System.Web.Services.WebService
         return dt;
     }
 
+    [WebMethod]
+    public void CARRELLO_DiscardItemInCart(int chiavePRODOTTO, int chiaveCLIENTE)
+    {
+        DATABASE DB = new DATABASE();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spCARRELLO_DiscardItemInCart";
+        DB.cmd.Parameters.AddWithValue("chiavePRODOTTO", chiavePRODOTTO);
+        DB.cmd.Parameters.AddWithValue("chiaveCLIENTE", chiaveCLIENTE);
+        DB.EseguiSPNonRead();
+    }
+
 }
