@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Services;
 
@@ -81,6 +82,22 @@ public class WsAmatron : System.Web.Services.WebService
         DB.query = "spAMATRON_IncassiMensiliPerCategoria";
         dt = DB.EseguiSPRead();
         dt.TableName = "IncassiMensiliPerCategoria";
+        return dt;
+    }
+    
+    [WebMethod]
+    public DataTable AMATRON_RESIFILTRA(string nominativo, int numero_ordine, int startdate, int enddate)
+    {
+        DATABASE DB = new DATABASE();
+        DataTable dt = new DataTable();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spRESI_ORDINI_PRODOTTI_CLIENTI_Filter";
+        DB.cmd.Parameters.AddWithValue("nominativo", nominativo);
+        DB.cmd.Parameters.AddWithValue("numero_ordine", numero_ordine);
+        DB.cmd.Parameters.AddWithValue("startdate", startdate);
+        DB.cmd.Parameters.AddWithValue("enddate", enddate);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "RESIFILTRA";
         return dt;
     }
 }

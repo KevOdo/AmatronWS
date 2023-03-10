@@ -189,4 +189,38 @@ public class WsOrdini : System.Web.Services.WebService
         dt.TableName = "SelectOrdineCliente";
         return dt;
     }
+
+    //[WebMethod]
+    //public DataTable VENDITORI_ORDINI_Filter(int chiave, string TITOLO, int chiaveCATEGORIA, int chiaveORDINI, string DInizio, string DFine)
+    //{
+    //    DataTable DT = new DataTable();
+    //    DATABASE D = new DATABASE();
+    //    D.cmd.Parameters.Clear();
+    //    D.query = "spORDINI_PRODOTTI_CATEGORIA_Filter";
+    //    D.cmd.Parameters.AddWithValue("TITOLO", TITOLO);
+    //    D.cmd.Parameters.AddWithValue("chiaveORDINI", chiaveORDINI);
+    //    D.cmd.Parameters.AddWithValue("chiaveCATEGORIA", chiaveCATEGORIA);
+    //    D.cmd.Parameters.AddWithValue("chiaveVENDITORE", chiave);
+
+    //    if (string.IsNullOrWhiteSpace(DInizio))
+    //    {
+    //        D.cmd.Parameters.AddWithValue("STARTDATE", DBNull.Value);
+    //    }
+    //    else
+    //    {
+    //        D.cmd.Parameters.AddWithValue("STARTDATE", DateTime.Parse(DInizio));
+    //    }
+    //    if (string.IsNullOrWhiteSpace(DFine))
+    //    {
+    //        D.cmd.Parameters.AddWithValue("ENDDATE", DBNull.Value);
+    //    }
+    //    else
+    //    {
+    //        D.cmd.Parameters.AddWithValue("ENDDATE", DateTime.Parse(DFine));
+    //    }
+
+    //    DT = D.EseguiSPRead();
+    //    DT.TableName = "VOFilter";
+    //    return DT;
+    //}
 }
