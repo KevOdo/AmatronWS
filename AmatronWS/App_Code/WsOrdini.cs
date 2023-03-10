@@ -189,6 +189,19 @@ public class WsOrdini : System.Web.Services.WebService
         dt.TableName = "SelectOrdineCliente";
         return dt;
     }
+    
+    [WebMethod]
+    public DataTable ORDINI_InsertFromCarrello(int chiaveCliente)
+    {
+        DATABASE DB = new DATABASE();
+        DataTable dt = new DataTable();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spORDINI_InsertFromCarrello";
+        DB.cmd.Parameters.AddWithValue("chiaveCliente", chiaveCliente);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "InsertFromCarrello";
+        return dt;
+    }
 
     [WebMethod]
     public DataTable ORDINI_Filter(int chiavecliente, string DInizio, string DFine)
