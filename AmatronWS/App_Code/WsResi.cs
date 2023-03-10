@@ -97,4 +97,17 @@ public class WsResi : System.Web.Services.WebService
         dt.TableName = "SelectByOrder";
         return dt;
     }
+    
+    [WebMethod]
+    public DataTable RESI_SelectCount(int chiaveordine)
+    {
+        DataTable dt = new DataTable();
+        DATABASE DB = new DATABASE();
+        DB.cmd.Parameters.Clear();
+        DB.query = "spRESI_SelectCount";
+        DB.cmd.Parameters.AddWithValue("chiaveOrdine", chiaveordine);
+        dt = DB.EseguiSPRead();
+        dt.TableName = "SelectCount";
+        return dt;
+    }
 }
