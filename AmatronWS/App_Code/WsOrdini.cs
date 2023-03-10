@@ -190,37 +190,33 @@ public class WsOrdini : System.Web.Services.WebService
         return dt;
     }
 
-    //[WebMethod]
-    //public DataTable VENDITORI_ORDINI_Filter(int chiave, string TITOLO, int chiaveCATEGORIA, int chiaveORDINI, string DInizio, string DFine)
-    //{
-    //    DataTable DT = new DataTable();
-    //    DATABASE D = new DATABASE();
-    //    D.cmd.Parameters.Clear();
-    //    D.query = "spORDINI_PRODOTTI_CATEGORIA_Filter";
-    //    D.cmd.Parameters.AddWithValue("TITOLO", TITOLO);
-    //    D.cmd.Parameters.AddWithValue("chiaveORDINI", chiaveORDINI);
-    //    D.cmd.Parameters.AddWithValue("chiaveCATEGORIA", chiaveCATEGORIA);
-    //    D.cmd.Parameters.AddWithValue("chiaveVENDITORE", chiave);
+    [WebMethod]
+    public DataTable ORDINI_Filter(int chiavecliente, string DInizio, string DFine)
+    {
+        DataTable DT = new DataTable();
+        DATABASE D = new DATABASE();
+        D.cmd.Parameters.Clear();
+        D.query = "spORDINI_CLIENTI_PRODOTTI_SPEDIZIONI_Filter";
+        D.cmd.Parameters.AddWithValue("chiaveCLIENTE", chiavecliente);
+        if (string.IsNullOrWhiteSpace(DInizio))
+        {
+            D.cmd.Parameters.AddWithValue("STARTDATE", DBNull.Value);
+        }
+        else
+        {
+            D.cmd.Parameters.AddWithValue("STARTDATE", DateTime.Parse(DInizio));
+        }
+        if (string.IsNullOrWhiteSpace(DFine))
+        {
+            D.cmd.Parameters.AddWithValue("ENDDATE", DBNull.Value);
+        }
+        else
+        {
+            D.cmd.Parameters.AddWithValue("ENDDATE", DateTime.Parse(DFine));
+        }
 
-    //    if (string.IsNullOrWhiteSpace(DInizio))
-    //    {
-    //        D.cmd.Parameters.AddWithValue("STARTDATE", DBNull.Value);
-    //    }
-    //    else
-    //    {
-    //        D.cmd.Parameters.AddWithValue("STARTDATE", DateTime.Parse(DInizio));
-    //    }
-    //    if (string.IsNullOrWhiteSpace(DFine))
-    //    {
-    //        D.cmd.Parameters.AddWithValue("ENDDATE", DBNull.Value);
-    //    }
-    //    else
-    //    {
-    //        D.cmd.Parameters.AddWithValue("ENDDATE", DateTime.Parse(DFine));
-    //    }
-
-    //    DT = D.EseguiSPRead();
-    //    DT.TableName = "VOFilter";
-    //    return DT;
-    //}
+        DT = D.EseguiSPRead();
+        DT.TableName = "ORDINIFILTER";
+        return DT;
+    }
 }
