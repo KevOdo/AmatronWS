@@ -86,7 +86,7 @@ public class WsAmatron : System.Web.Services.WebService
     }
     
     [WebMethod]
-    public DataTable AMATRON_RESIFILTRA(string nominativo, int numero_ordine, string startdate, string enddate)
+    public DataTable AMATRON_RESIFILTRA(string nominativo, int? numero_ordine, string startdate, string enddate)
     {
         DATABASE DB = new DATABASE();
         DataTable DT = new DataTable();
