@@ -86,18 +86,33 @@ public class WsAmatron : System.Web.Services.WebService
     }
     
     [WebMethod]
-    public DataTable AMATRON_RESIFILTRA(string nominativo, int numero_ordine, int startdate, int enddate)
+    public DataTable AMATRON_RESIFILTRA(string nominativo, int numero_ordine, string startdate, string enddate)
     {
         DATABASE DB = new DATABASE();
-        DataTable dt = new DataTable();
+        DataTable DT = new DataTable();
         DB.cmd.Parameters.Clear();
         DB.query = "spRESI_ORDINI_PRODOTTI_CLIENTI_Filter";
         DB.cmd.Parameters.AddWithValue("nominativo", nominativo);
-        DB.cmd.Parameters.AddWithValue("numero_ordine", numero_ordine);
-        DB.cmd.Parameters.AddWithValue("startdate", startdate);
-        DB.cmd.Parameters.AddWithValue("enddate", enddate);
-        dt = DB.EseguiSPRead();
-        dt.TableName = "RESIFILTRA";
-        return dt;
+        DB.cmd.Parameters.AddWithValue("numero_ordine", numero_ordine);       
+        if (string.IsNullOrWhiteSpace(startdate))
+        {
+            DB.cmd.Parameters.AddWithValue("STARTDATE", DBNull.Value);
+        }
+        else
+        {
+            DB.cmd.Parameters.AddWithValue("STARTDATE", DateTime.Parse(startdate));
+        }
+        if (string.IsNullOrWhiteSpace(enddate))
+        {
+            DB.cmd.Parameters.AddWithValue("ENDDATE", DBNull.Value);
+        }
+        else
+        {
+            DB.cmd.Parameters.AddWithValue("ENDDATE", DateTime.Parse(enddate));
+        }
+
+        DT = DB.EseguiSPRead();
+        DT.TableName = "AMATRONRESIFILTER";
+        return DT;
     }
 }
